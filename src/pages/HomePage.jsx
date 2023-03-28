@@ -1,8 +1,22 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import { getTrendingToday } from "../services/TrendingRepository";
 
 import { NavBar } from "../components";
 
 const HomePage = () => {
+
+  const [trendingToday, setTrendingToday] = useState([])
+
+  const getData = async () => {
+    const { data : {results}} = await getTrendingToday();
+    setTrendingToday(results);
+    console.log(trendingToday);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <>
       <NavBar />
